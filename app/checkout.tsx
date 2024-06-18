@@ -28,6 +28,8 @@ const Checkout = () => {
   const pagerTitles = ["Shipping", "Payment", "Review"];
 
   useEffect(() => {
+    viewPager.current?.setPage(page);
+
     const backAction = () => {
       if (page > 0) {
         setPage(page - 1);
@@ -39,8 +41,6 @@ const Checkout = () => {
     };
 
     BackHandler.addEventListener("hardwareBackPress", backAction);
-
-    viewPager.current?.setPage(page);
   }, [page]);
 
   return (
@@ -375,7 +375,10 @@ const Checkout = () => {
                 extraBtnClass="bg-primary"
                 extraTxtClass="text-white"
                 label="Back to Shopping"
-                handlePress={() => router.replace('/home')}
+                handlePress={() => {
+                  setShowModal(false);
+                  router.replace("/home");
+                }}
               />
             </View>
           </View>
