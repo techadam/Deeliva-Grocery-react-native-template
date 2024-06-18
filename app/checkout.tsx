@@ -28,8 +28,6 @@ const Checkout = () => {
   const pagerTitles = ["Shipping", "Payment", "Review"];
 
   useEffect(() => {
-    viewPager.current?.setPage(page);
-
     const backAction = () => {
       if (page > 0) {
         setPage(page - 1);
@@ -40,7 +38,15 @@ const Checkout = () => {
       return true;
     };
 
-    BackHandler.addEventListener("hardwareBackPress", backAction);
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
+  }, [page]);
+
+  useEffect(() => {
+    viewPager.current?.setPage(page);
   }, [page]);
 
   return (

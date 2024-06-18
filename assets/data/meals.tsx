@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export const promos = [
@@ -5,6 +6,41 @@ export const promos = [
   "https://cdn.pixabay.com/photo/2022/11/02/17/19/holiday-7565539_640.jpg",
   "https://cdn.pixabay.com/photo/2022/03/15/13/19/sale-7070341_640.png",
   "https://cdn.pixabay.com/photo/2014/09/04/11/03/supermarket-435452_640.jpg",
+];
+
+export const orders = [
+  {
+    id: "#0012345",
+    status: "On Delivery",
+    itemQty: 12,
+    icon: "cube-outline" as keyof typeof Ionicons.glyphMap,
+    iconColor: "#feab02",
+    iconContainerBg: "bg-[#fff3cd]",
+  },
+  {
+    id: "#0012341",
+    status: "Completed",
+    itemQty: 12,
+    icon: "cube-outline" as keyof typeof Ionicons.glyphMap,
+    iconColor: "#fff",
+    iconContainerBg: 'bg-primary',
+  },
+  {
+    id: "#0012342",
+    status: "Cancelled",
+    itemQty: 12,
+    icon: "cube-outline" as keyof typeof Ionicons.glyphMap,
+    iconColor: "#fff",
+    iconContainerBg: "bg-red-500",
+  },
+  {
+    id: "#0012343",
+    status: "Completed",
+    itemQty: 12,
+    icon: "cube-outline" as keyof typeof Ionicons.glyphMap,
+    iconColor: "#fff",
+    iconContainerBg: 'bg-primary',
+  },
 ];
 
 export const meals = [

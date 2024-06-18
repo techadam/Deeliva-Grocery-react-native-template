@@ -103,6 +103,24 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
+          name="orders"
+          options={{
+            headerTitle: "Orders",
+            headerShadowVisible: false,
+            headerTitleStyle: {
+              fontFamily: "Poppins-SemiBold",
+            },
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                className="mr-4"
+              >
+                <Ionicons name="arrow-back" size={25} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <Stack.Screen
           name="(modal)/filter"
           options={{
             presentation: "modal",
