@@ -1,0 +1,112 @@
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  Image,
+} from "react-native";
+import React, { useLayoutEffect, useState } from "react";
+import { Link, useNavigation, router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
+import CustomInput from "@/components/CustomInput";
+import { meals } from "@/assets/data/meals";
+
+const Products = () => {
+  const navigation = useNavigation();
+  const [mealsData, setmealsData] = useState([...meals, ...meals, ...meals])
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Fruits",
+      headerTitle: "Fruits",
+      headerShadowVisible: false,
+      headerTitleStyle: {
+        fontFamily: "Poppins-SemiBold",
+      },
+      headerRight: () => (
+        <View className="flex-row">
+          <Link href={'/(modal)/filter'} asChild className="mr-4">
+            <Ionicons name="funnel-outline" size={24} />
+          </Link>
+          <TouchableOpacity>
+            <Ionicons name="ellipsis-vertical-outline" size={24} />
+          </TouchableOpacity>
+        </View>
+      ),
+    });
+  }, []);
+
+  return (
+    <SafeAreaView className="flex-1 bg-white" edges={["bottom"]}>
+      <FlatList
+        className="h-full"
+        data={mealsData}
+        keyExtractor={(item, index) => `${item}-${index}`}
+        ItemSeparatorComponent={() => (
+          <View className="h-[1px] bg-grey1"></View>
+        )}
+        ListFooterComponent={() => (
+          <>
+            <View className="h-[1px] bg-grey1"></View>
+            <View className="pb-16"></View>
+          </>
+        )}
+        ListHeaderComponent={() => (
+          <View className="px-6">
+            <CustomInput
+              iconLeft="search-outline"
+              placeholder="Search beverages or foods"
+            />
+          </View>
+        )}
+        renderItem={({ item, index }) => (
+          <View className="p-4 px-6">
+            <View className="flex-row items-center gap-6 relative">
+              <TouchableOpacity className="absolute -top-1 -left-2 bg-red-500 rounded-xl p-2 z-10">
+                <Ionicons name="heart-outline" size={16} color={"#fff"} />
+              </TouchableOpacity>
+
+              <Image
+                source={{ uri: item.img }}
+                className="h-[80px] w-[85px] rounded-xl"
+              />
+
+              <View className="flex-1">
+                <TouchableOpacity onPress={() => router.push('/details')}>
+                  <Text className="text-lg font-psemibold">{item.name}</Text>
+                  <View className="gap-2 flex-row items-end">
+                    <Text className="font-psemibold text-sm">
+                      ${item.price}
+                    </Text>
+                    <Text className="text-grey3 font-pregular text-sm line-through">
+                      ${(item.price + 2).toFixed(2)}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+
+                <View className="flex-row items-end justify-between">
+                  <View className="flex-row items-center">
+                    <Ionicons name="pricetag" size={14} color="#C88A04" />
+                    <Text className="text-[13px] font-pmedium text-yellow-600 ml-2">
+                      Disc. 10% Off
+                    </Text>
+                  </View>
+
+                  <TouchableOpacity className="p-2 rounded-xl justify-center items-center bg-primary">
+                    <Ionicons name="cart" size={26} color="#fff" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+        )}
+      />
+    </SafeAreaView>
+  );
+};
+
+export default Products;
+
+const styles = StyleSheet.create({});
